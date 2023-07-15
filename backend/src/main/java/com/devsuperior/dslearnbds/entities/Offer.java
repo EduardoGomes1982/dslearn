@@ -1,13 +1,13 @@
 package com.devsuperior.dslearnbds.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -20,23 +20,25 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "tb_course")
-public class Course {
+@Table(name = "tb_offer")
+public class Offer {
     @EqualsAndHashCode.Include
     @NonNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @NonNull
-    private String name;
 
     @NonNull
-    private String imgUri;
+    private String edition;
 
     @NonNull
-    private String imgGrayUri;
+    private Instant startMoment;
 
-    @OneToMany(mappedBy = "course")
-    private final List<Offer> offers = new ArrayList<>();
+    @NonNull
+    private Instant endMoment;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 }
