@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,9 +36,11 @@ public class Offer {
     private String edition;
 
     @NonNull
+    @Column(columnDefinition = "timestamp with time zone")
     private Instant startMoment;
 
     @NonNull
+    @Column(columnDefinition = "timestamp with time zone")
     private Instant endMoment;
 
     @NonNull
