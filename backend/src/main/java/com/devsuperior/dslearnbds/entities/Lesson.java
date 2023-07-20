@@ -53,5 +53,8 @@ public abstract class Lesson {
     private final Set<Enrollment> enrollmentsDone = new HashSet<>();
 
     @OneToMany(mappedBy = "lesson")
+    private Set<Topic> topics = new HashSet<>();
+
+    @OneToMany(mappedBy = "lesson")
     private final Set<Deliver> deliveries = new HashSet<>();
 }
