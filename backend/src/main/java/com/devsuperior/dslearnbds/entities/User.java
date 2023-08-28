@@ -53,6 +53,14 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Notification> notifications = new HashSet<>();
 
+    public boolean hasHole(String holeName) {
+        for (Role role : roles)
+            if (role.getAuthority().equals(holeName))
+                return true;
+
+        return false;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles().stream().map(e -> new SimpleGrantedAuthority(e.getAuthority())).toList();
