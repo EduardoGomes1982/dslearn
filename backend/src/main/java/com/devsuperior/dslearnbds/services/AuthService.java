@@ -16,10 +16,9 @@ public class AuthService {
     private UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public User authenticated() {
+    private User authenticated() {
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            System.out.println(username);
             return userRepository.findByEmail(username);
         } catch (Exception e) {
             throw new UnauthorizedException("Invalid user");
@@ -28,7 +27,7 @@ public class AuthService {
 
     public void validateSelfOrAdmin(Long userId) {
         User user = authenticated();
-        if (!user.getId().equals(userId) && user.hasHole("ROLE_ADMIN"))
+        if (!user.getId().equals(userId) && !user.hasHole("ROLE_ADMIN"))
             throw new ForbiddenException("Access denied");
     }
 }

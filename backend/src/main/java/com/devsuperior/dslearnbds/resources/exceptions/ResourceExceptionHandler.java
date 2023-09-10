@@ -10,9 +10,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException.Forbidden;
 
 import com.devsuperior.dslearnbds.services.exceptions.DatabaseException;
+import com.devsuperior.dslearnbds.services.exceptions.ForbiddenException;
 import com.devsuperior.dslearnbds.services.exceptions.ResourceNotFoundException;
 import com.devsuperior.dslearnbds.services.exceptions.UnauthorizedException;
 
@@ -59,8 +59,8 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 
-	@ExceptionHandler(Forbidden.class)
-	public ResponseEntity<OAuthCustomError> forbidden(Forbidden e, HttpServletRequest request) {
+	@ExceptionHandler(ForbiddenException.class)
+	public ResponseEntity<OAuthCustomError> forbidden(ForbiddenException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.FORBIDDEN;
 		OAuthCustomError err = new OAuthCustomError("Forbidden", e.getMessage());
 		return ResponseEntity.status(status).body(err);
