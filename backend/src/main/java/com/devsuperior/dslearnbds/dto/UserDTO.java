@@ -3,10 +3,10 @@ package com.devsuperior.dslearnbds.dto;
 import com.devsuperior.dslearnbds.entities.User;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
